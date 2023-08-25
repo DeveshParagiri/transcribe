@@ -11,6 +11,13 @@ CORS(application)
 AUDIO_UPLOAD_FOLDER = os.path.join(os.getcwd(),'audios')
 TRANSCRIPTS_UPLOAD_FOLDER = os.path.join(os.getcwd(),'transcripts')
 
+if os.path.exists(AUDIO_UPLOAD_FOLDER) == False:
+    os.mkdir(AUDIO_UPLOAD_FOLDER)
+
+if os.path.exists(TRANSCRIPTS_UPLOAD_FOLDER) == False:
+    os.mkdir(TRANSCRIPTS_UPLOAD_FOLDER)
+
+
 @application.route('/', methods=["GET","POST"])
 def index():
     return render_template("index.html")
