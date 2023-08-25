@@ -6,6 +6,7 @@ from emailing import email
 from datetime import datetime
 
 application = Flask(__name__)
+
 CORS(application)
 
 AUDIO_UPLOAD_FOLDER = os.path.join(os.getcwd(),'audios')
