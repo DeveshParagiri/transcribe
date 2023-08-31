@@ -4,7 +4,6 @@ from flask_cors import CORS
 from fastertranscription import transcribefaster
 from emailing import email
 from datetime import datetime
-
 application = Flask(__name__)
 
 CORS(application)
@@ -27,6 +26,7 @@ def index():
 def upload_static_file():
     audio_file = request.files["static_file"]
     if audio_file:
+
         audio_location = os.path.join(
             AUDIO_UPLOAD_FOLDER,
             audio_file.filename
@@ -36,7 +36,7 @@ def upload_static_file():
         filename = f'Transcription_{datetime.now().strftime("%Y_%m_%d-%I_%M_%S_%p")}.txt'
         currfile = os.path.join(TRANSCRIPTS_UPLOAD_FOLDER,filename)
         with open(currfile,'w+') as f:
-            f.write(f'{response["text"]}\n\nDURATION TAKEN: {response["duration"]}\n')
+            f.write(f'{response["text"]}\n\nDURATION TAKEN(LOCAL MACHINE): {response["duration"]}\n')
         if email(["devesh.paragiri@gmail.com","bhuvana.kundumani@gmail.com"], currfile, filename):
             os.remove(audio_location)
             os.remove(currfile)
@@ -45,6 +45,6 @@ def upload_static_file():
                 "text": response["text"],
                 "path":currfile}
         return jsonify(resp), 200
-        
-# if __name__=="__main__":
-#     application.run(debug=True, port=3000)
+
+if __name__=="__main__":
+    application.run(debug=True)
