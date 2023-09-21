@@ -2,7 +2,7 @@ from faster_whisper import WhisperModel
 import time
 from datetime import timedelta
 
-model_size = "large-v2"
+model_size = "base"
 
 model = WhisperModel(model_size, device="cpu", compute_type="int8")
 

@@ -5,7 +5,7 @@ function uploadFile(form)
  var oBody = document.getElementById("form-area")
  var oNewtr = document.getElementById("newtr")
  var oReq = new XMLHttpRequest();
-     oReq.open("POST", "upload_static_file", true);
+ oReq.open("POST", "upload_static_file", true);
  oReq.onload = function(oEvent) {
      if (oReq.status == 200) {
       const obj = JSON.parse(oReq.response);

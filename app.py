@@ -4,9 +4,9 @@ from flask_cors import CORS
 from fastertranscription import transcribefaster
 from emailing import email
 from datetime import datetime
-application = Flask(__name__)
+app = Flask(__name__)
 
-CORS(application)
+CORS(app)
 
 AUDIO_UPLOAD_FOLDER = os.path.join(os.getcwd(),'audios')
 TRANSCRIPTS_UPLOAD_FOLDER = os.path.join(os.getcwd(),'transcripts')
@@ -18,11 +18,11 @@ if os.path.exists(TRANSCRIPTS_UPLOAD_FOLDER) == False:
     os.mkdir(TRANSCRIPTS_UPLOAD_FOLDER)
 
 
-@application.route('/', methods=["GET","POST"])
+@app.route('/', methods=["GET","POST"])
 def index():
     return render_template("index.html")
 
-@application.route('/upload_static_file', methods=["GET","POST"])
+@app.route('/upload_static_file', methods=["GET","POST"])
 def upload_static_file():
     audio_file = request.files["static_file"]
     if audio_file:
@@ -46,5 +46,5 @@ def upload_static_file():
                 "path":currfile}
         return jsonify(resp), 200
 
-if __name__=="__main__":
-    application.run(debug=True)
+# if __name__=="__main__":
+#     application.run(debug=True)
